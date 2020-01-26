@@ -1,0 +1,6 @@
+.env
+.vscode
+dist
+node_modules
+tools/s3/*.md
+yarn-error.log
