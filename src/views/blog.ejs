@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Blog App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <h1>Welcome! <%= user.name %></h1>
-    <a href="logout">Logout</a>
-    <ul>
-        <% posts.forEach(function(post){ %>
-            <li><%= post.name %></li>
-        <% }); %>
-    </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <h3 class="center-align">Welcome, <%= user.name %>!</h3>
+        </div>
+        <div class="row">
+            <% if (posts.length === 0) { %>
+                <div class="row">
+                    <h3 class="center-align red darken-2">Posts not found</h3>
+                </div>
+            <% } else { %>
+                <ul>
+                    <% posts.forEach(function(post){ %>
+                        <li><%= post.name %></li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

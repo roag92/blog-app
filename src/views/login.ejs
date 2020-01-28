@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Loing</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Blog App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <form method="POST">
-        <input type="text" name="username" />
-        <input type="password" name="password">
-        <input type="submit">
-    </form>
-    <% if (error) { %>
-        <h2><%= error %></h2>
-    <% } %>
+    <div class="container">
+        <div class="row">
+            <h2 class="center-align">Plese, login!</h2>
+        </div>
+        <div class="row">
+            <form method="POST">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_box</i>
+                    <input placeholder="Your username" id="username" name="username" type="text">
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">security</i>
+                    <input placeholder="Your password" id="password" name="password" type="password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="col s12 center-align">
+                    <input class="waves-effect waves-light btn" type="submit">
+                </div>
+            </form>
+        </div>
+        <% if (error) { %>
+            <div class="row">
+                <h3 class="center-align red darken-2"><%= error %></h3>
+            </div>
+        <% } %>
+    </div>
 </body>
 </html>
