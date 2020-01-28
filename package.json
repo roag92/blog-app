@@ -11,7 +11,7 @@
     "tsc": "tsc",
     "build": "npm-run-all clean lint tsc copy:assets",
     "dev:start": "npm-run-all build start",
-    "dev": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
+    "dev": "nodemon --watch src -e ts,ejs --exec yarn dev:start",
     "start": "node dist/index.js",
     "init:db": "ts-node tools/db/init-db",
     "init:s3": "ts-node tools/s3/init-s3",
