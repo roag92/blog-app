@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-import aws from "aws-sdk";
-import fs from "fs-extra";
+import dotenv from 'dotenv';
+import aws from 'aws-sdk';
+import fs from 'fs-extra';
 
 const init = async () => {
     dotenv.config();
@@ -11,7 +11,7 @@ const init = async () => {
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
             region: process.env.AWS_REGION
         });
-        
+
         const s3: aws.S3 = new aws.S3();
 
         fs.readdirSync('./tools/s3/').forEach(async (file) => {
@@ -22,17 +22,17 @@ const init = async () => {
                     Body: `./tools/s3/${file}`
                 }).promise();
 
-                console.log(`Uploaded file: ${file}`);
+                console.info(`Uploaded file: ${file}`);
             }
         });
     } catch (err) {
-        console.log(err);
+        console.info(err);
         throw err;
     }
 }
 
 init().then(() => {
-    console.log("Files imported successfully" );
+    console.info('Files imported successfully' );
 }).catch(() => {
-    console.log("Error at moment to import files");
+    console.error('Error at moment to import files');
 });

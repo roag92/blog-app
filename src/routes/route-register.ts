@@ -1,49 +1,28 @@
-import * as express from "express";
+import * as express from 'express';
 
-import { IRegister } from "../core/register-interface";
-import { SESSION_ID, COOKIE_NAME } from "../middleware/session-auth";
-import { Post } from "../model/blog";
-import { getDatabase } from "../core/database";
-import { getS3 } from "../core/s3";
+import { IRegister } from '../core/register-interface';
 
-export class Route implements IRegister
+import { AuthController } from '../controller/auth-controller';
+import { BlogController } from '../controller/blog-controller';
+import { Route } from '../core/route';
+import { HTTP_GET, HTTP_POST } from '../core/abstract-controller';
+
+export class RouteRegister implements IRegister
 {
-    register(app: express.Application): void {
-        app.get("/login", (req: express.Request, res: express.Response) => {
-            res.render("login", { error: null });
-        });
+    public register(app: express.Application): void {
 
-        app.post("/login", async (req: express.Request, res: express.Response) => {
-            const { username, password } = req.body;
+        const routes =  new AuthController().getRoutes()
+            .concat(new BlogController().getRoutes())
 
-            if (username && password) {
-                const db = getDatabase();
-
-                const user = await db.users.findByUserNameAndPassword(username, password);
-
-                if (user) {
-                    req.session[SESSION_ID] = user;
-
-                    res.redirect("blog");
-
-                    return;
-                }
+        routes.forEach((route: Route) => {
+            switch (route.method) {
+                case HTTP_GET:
+                    app.get(route.uri, route.action);
+                    break;
+                case HTTP_POST:
+                    app.post(route.uri, route.action);
+                    break;
             }
-
-            res.render("login", { error: "Usuario no encontrado" });
-        });
-
-        app.get("/blog", async (req: express.Request, res: express.Response) => {
-            res.render("blog", { user: req.session[SESSION_ID], posts: await getS3().listObjects() });
-        });
-
-        app.get("/logout", (req: express.Request, res: express.Response) => {
-            req.session[SESSION_ID] = null;
-            res.clearCookie(COOKIE_NAME);
-
-            res.redirect("login");
-
-            return;
         });
     }
 }

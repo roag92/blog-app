@@ -1,13 +1,13 @@
-import session from "express-session";
-import * as express from "express";
+import session from 'express-session';
+import * as express from 'express';
 
-import { IRegister } from "../core/register-interface";
+import { IRegister } from '../core/register-interface';
 
 export const COOKIE_NAME = 'session-id';
 export const SESSION_ID = 'user'
 
-export class SessionAuth implements IRegister {
-    register(app: express.Application): void {
+export class SessionRegister implements IRegister {
+    public register(app: express.Application): void {
         app.use(session({
             resave: true,
             saveUninitialized: false,
@@ -20,10 +20,6 @@ export class SessionAuth implements IRegister {
         }));
 
         app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-            if (req.cookies[COOKIE_NAME] && !req.session[SESSION_ID]) {
-                res.clearCookie(COOKIE_NAME);
-            }
-
             if (req.path === '/logout') {
                 next();
 

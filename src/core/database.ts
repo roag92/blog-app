@@ -1,6 +1,6 @@
-import pgPromise, { IMain, IInitOptions } from "pg-promise";
-import UserRepository from "../repository/user-repository";
-import { ExtendedProtocol, IExtensions } from "./extended-protocol";
+import pgPromise, { IMain, IInitOptions } from 'pg-promise';
+import UserRepository from '../repository/user-repository';
+import { ExtendedProtocol, IExtensions } from './extended-protocol';
 
 let _instance: ExtendedProtocol = null;
 

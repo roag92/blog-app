@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-import fs from "fs-extra";
-import { Client } from "pg";
+import dotenv from 'dotenv';
+import fs from 'fs-extra';
+import { Client } from 'pg';
 
 const init = async () => {
     dotenv.config();
@@ -10,7 +10,7 @@ const init = async () => {
     try {
         await client.connect();
 
-        const sql = await fs.readFile("./tools/db/init-db.pgsql", { encoding: "UTF-8" } );
+        const sql = await fs.readFile('./tools/db/init-db.pgsql', { encoding: 'UTF-8' } );
 
         const statements = sql.split(/;\s*$/m);
 
@@ -20,7 +20,7 @@ const init = async () => {
             }
         }
     } catch (err) {
-        console.log(err);
+        console.error(err);
         throw err;
     } finally {
         await client.end();
@@ -28,7 +28,7 @@ const init = async () => {
 };
 
 init().then(() => {
-    console.log("Data imported successfully" );
+    console.info('Data imported successfully' );
 }).catch(() => {
-    console.log("Error at moment to import database");
+    console.error('Error at moment to import database');
 });
