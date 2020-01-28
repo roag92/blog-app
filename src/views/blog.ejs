@@ -25,11 +25,24 @@
                     <h3 class="center-align red darken-2">Posts not found</h3>
                 </div>
             <% } else { %>
-                <ul>
-                    <% posts.forEach(function(post){ %>
-                        <li><%= post.name %></li>
-                    <% }); %>
-                </ul>
+                <table>
+                    <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Link</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% posts.forEach(function(post){ %>
+                            <tr>
+                                <td><%= post.id %></td>
+                                <td><%= post.name %></td>
+                                <td><%= post.link %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
             <% } %>
         </div>
     </div>
