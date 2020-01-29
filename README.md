@@ -12,9 +12,9 @@ This project is a PoC for using resources from AWS such as EC2, RDS and S3.
 
 ```bash
 yarn install
-# Set the right values to your .env file
+# Set the right values to your .env file according to your AWS resources
 cp .env.dist .env
-# Load the database structure creating a new user
+# Load the database structure creating a new user from tools/db directory
 yarn init:db
 # Upload the posts files written in markdown which are into tools/s3 directory
 yarn init:s3
